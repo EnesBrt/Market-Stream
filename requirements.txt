@@ -1,0 +1,16 @@
+# FastAPI et serveur
+fastapi==0.111.0
+uvicorn[standard]==0.30.1
+
+# WebSockets
+websockets==12.0
+
+# Redis (pour plus tard)
+redis==5.0.8
+
+# Base pour les tests
+requests==2.32.3
+
+# Formatage et style de code
+black==25.1.0
+isort==6.0.1 

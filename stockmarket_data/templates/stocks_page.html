@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<h2>Recherche d'actions</h2>
+<form action="{% url 'stockmarket_data:stocks_list' %}" method="get">
+    <input name="q" type="text" placeholder="Search by stock symbol">
+    <input name="date" type="date" placeholder="Select date (YYYY-MM-DD)">
+    <button type="submit">Search</button>
+</form>
+
+{% if stocks %}
+    {% for search_item in stocks %}
+        <div class="stock-item" style="border: 1px solid #ccc; margin: 10px; padding: 15px; border-radius: 5px;">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <h4>{{ search_item.stock_id.stock_symbol }}</h4>
+                <form action="{% url 'stockmarket_data:delete_stock' search_item.pk %}" method="post" style="margin: 0;">
+                    {% csrf_token %}
+                    <button type="submit" onclick="return confirm('Supprimer cette recherche ?')" 
+                            style="background: red; color: white; border: none; padding: 5px 10px; border-radius: 3px;">
+                        Supprimer
+                    </button>
+                </form>
+            </div>
+            
+            <p><strong>Date:</strong> {{ search_item.stock_id.from_date }}</p>
+            <p><strong>Prix d'ouverture:</strong> ${{ search_item.stock_id.at_open }}</p>
+            <p><strong>Prix de clôture:</strong> ${{ search_item.stock_id.at_close }}</p>
+            <p><strong>Plus haut:</strong> ${{ search_item.stock_id.high }}</p>
+            <p><strong>Plus bas:</strong> ${{ search_item.stock_id.low }}</p>
+            <p><strong>Volume:</strong> {{ search_item.stock_id.volume }}</p>
+            <p><strong>SMA:</strong> {{ search_item.stock_id.sma|floatformat:2 }}</p>
+            <p><strong>EMA:</strong> {{ search_item.stock_id.ema|floatformat:2 }}</p>
+            <p><strong>RSI:</strong> {{ search_item.stock_id.rsi|floatformat:2 }}</p>
+            <p><strong>MACD:</strong> {{ search_item.stock_id.macd|floatformat:2 }}</p>
+        </div>
+    {% endfor %}
+{% else %}
+    <p>Aucune recherche effectuée. Faites une recherche pour voir les résultats ici.</p>
+{% endif %} 
+
+{% endblock %}

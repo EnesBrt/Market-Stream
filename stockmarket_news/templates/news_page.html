@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+{% for article in news %}
+    <h2>{{ article.title }}</h2>
+    <p>{{ article.summary }}</p>
+    {% if not article.banner_image %}
+    <img src="{% static 'images/market_news.jpg' %}" alt="market_news_image" style="max-width: 300px; max-height: 300px; width: auto; height: auto; object-fit: contain; display: block;">
+    {% else %}
+        <img src="{{ article.banner_image }}" alt="news_image" style="max-width: 300px; max-height: 300px; width: auto; height: auto; object-fit: contain; display: block;">
+    {% endif %}
+    <p>{{ article.authors }}</p>
+    <p>{{ article.time_published }}</p>
+    <p>{{ article.source }}</p>
+    <p>{{ article.overall_sentiment_label }}</p>
+    <p>{{ article.overall_sentiment_score }}</p>
+    <p>{{ article.url }}</p>
+    <hr>
+{% endfor %}
+{% endblock %}

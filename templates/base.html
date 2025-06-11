@@ -1,0 +1,29 @@
+{% load static %}
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Market Stream</title>
+</head>
+<body>
+    {% if user.is_authenticated %}
+    <p>Welcome, {{ user.email }}</p>
+    <nav>
+        <a href="{% url 'accounts:logout' %}">Logout</a>
+        <a href="{% url 'stockmarket_news:news_list' %}">News</a>
+        <a href="{% url 'stockmarket_data:stocks_list' %}">Stocks</a>
+    </nav>
+    {% else %}
+    <nav>
+        <a href="{% url 'accounts:login' %}">Login</a>
+        <a href="{% url 'accounts:signup' %}">Signup</a>
+    </nav>
+    {% endif %}
+    
+    <div style="padding: 20px;">
+        {% block content %}
+        {% endblock %}
+    </div>
+</body>
+</html>

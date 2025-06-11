@@ -1,0 +1,98 @@
+version: '3.8'
+
+services:
+  # Base de données PostgreSQL pour stockage permanent
+  postgres:
+    image: postgres:15
+    container_name: market_postgres
+    environment:
+      POSTGRES_DB: market_stream
+      POSTGRES_USER: market_admin
+      POSTGRES_PASSWORD: "123456"
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - market_network
+
+  # Redis pour cache et messaging temps réel
+  redis:
+    image: redis:7-alpine
+    container_name: market_redis
+    ports:
+      - "6379:6379"
+    command: redis-server --appendonly yes
+    volumes:
+      - redis_data:/data
+    networks:
+      - market_network
+
+  # Application Django (API REST, admin, auth)
+  django_app:
+    build:
+      context: .
+      dockerfile: Dockerfile.django
+    container_name: market_django
+    ports:
+      - "8000:8000"
+    depends_on:
+      - postgres
+      - redis
+    environment:
+      - DATABASE_URL=postgresql://market_admin:123456@postgres:5432/market_stream
+      - REDIS_URL=redis://redis:6379/0
+      - DEBUG=1
+    volumes:
+      - .:/app
+    networks:
+      - market_network
+    command: python manage.py runserver 0.0.0.0:8000
+
+  # Application FastAPI (WebSocket streaming)
+  fastapi_app:
+    build:
+      context: .
+      dockerfile: Dockerfile.fastapi
+    container_name: market_fastapi
+    ports:
+      - "8001:8001"
+    depends_on:
+      - redis
+      - postgres
+    environment:
+      - REDIS_URL=redis://redis:6379/0
+      - DATABASE_URL=postgresql://market_admin:123456@postgres:5432/market_stream
+    volumes:
+      - .:/app
+    networks:
+      - market_network
+    command: uvicorn api.main:app --host 0.0.0.0 --port 8001 --reload
+
+  # Worker Celery pour tâches asynchrones (collecte de données)
+  celery_worker:
+    build:
+      context: .
+      dockerfile: Dockerfile.django
+    container_name: market_celery
+    depends_on:
+      - postgres
+      - redis
+    environment:
+      - DATABASE_URL=postgresql://market_admin:123456@postgres:5432/market_stream
+      - REDIS_URL=redis://redis:6379/0
+      - CELERY_BROKER_URL=redis://redis:6379/0
+    volumes:
+      - .:/app
+    networks:
+      - market_network
+    command: celery -A market_stream worker --loglevel=info
+
+volumes:
+  postgres_data:
+  redis_data:
+
+networks:
+  market_network:
+    driver: bridge 

@@ -1,0 +1,55 @@
+# Cache Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Tests
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Redis
+dump.rdb
+*.rdb
+
+# Celery
+celerybeat-schedule
+celerybeat.pid
+
+# Environnement virtuel
+env/
+venv/
+.venv/
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Logs
+*.log
+
+# Base de données locale
+*.db
+*.sqlite3
+
+# Variables d'environnement
+.env
+.env.local
+
+# Docker
+.dockerignore
+
+# Divers
+*.tmp
+*.temp
+results:
+transport:
+app:
