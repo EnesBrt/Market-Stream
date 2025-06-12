@@ -1,21 +1,309 @@
 {% extends "base.html" %}
 {% load static %}
 
+{% block title %}News - Market Stream{% endblock %}
+
 {% block content %}
-{% for article in news %}
-    <h2>{{ article.title }}</h2>
-    <p>{{ article.summary }}</p>
-    {% if not article.banner_image %}
-    <img src="{% static 'images/market_news.jpg' %}" alt="market_news_image" style="max-width: 300px; max-height: 300px; width: auto; height: auto; object-fit: contain; display: block;">
+<div class="space-y-12 animate-fade-in">
+    <!-- Hero Section Ultra-Moderne -->
+    <div class="glass-card rounded-3xl p-12 backdrop-blur-xl border border-white/10 relative overflow-hidden">
+        <!-- Background Gradient Overlay -->
+        <div class="absolute inset-0 bg-gradient-to-br from-market-cyan/10 via-transparent to-market-green/10 pointer-events-none"></div>
+        
+        <div class="relative z-10">
+            <div class="flex items-center justify-between mb-12">
+                <div class="flex items-center space-x-8">
+                    <div class="relative">
+                        <div class="w-24 h-24 bg-gradient-to-br from-market-cyan via-market-green to-market-blue rounded-3xl flex items-center justify-center shadow-2xl group-hover:scale-110 transition-transform duration-500">
+                            <span class="text-4xl">📰</span>
+                        </div>
+                        <div class="absolute -top-2 -right-2 w-6 h-6 bg-market-green rounded-full animate-pulse shadow-lg shadow-green-500/50"></div>
+                    </div>
+                    <div>
+                        <h1 class="text-6xl font-black bg-gradient-to-r from-white via-cyan-100 to-green-200 bg-clip-text text-transparent mb-3 leading-tight">
+                            Financial News
+                        </h1>
+                        <p class="text-gray-400 text-2xl font-medium">Real-time market insights • Breaking stories • Expert analysis</p>
+                    </div>
+                </div>
+                
+                <!-- Live Indicator -->
+                <div class="flex items-center space-x-3 px-6 py-4 glass rounded-2xl border border-white/20">
+                    <div class="relative">
+                        <div class="w-4 h-4 bg-market-green rounded-full animate-ping absolute"></div>
+                        <div class="w-4 h-4 bg-market-green rounded-full"></div>
+                    </div>
+                    <span class="text-white font-bold text-lg">LIVE</span>
+                </div>
+            </div>
+            
+            <!-- Enhanced Stats Row -->
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div class="glass rounded-3xl p-8 border border-white/10 group hover:bg-white/5 hover:scale-105 transition-all duration-300 cursor-pointer">
+                    <div class="flex items-center justify-between mb-6">
+                        <div class="w-14 h-14 bg-gradient-to-br from-market-green to-green-600 rounded-2xl flex items-center justify-center group-hover:rotate-12 transition-transform">
+                            <span class="text-2xl">📈</span>
+                        </div>
+                        <div class="text-4xl group-hover:scale-125 transition-transform">💹</div>
+                    </div>
+                    <div>
+                        <p class="text-gray-400 text-sm font-bold uppercase tracking-wider mb-3">Breaking News</p>
+                        <p class="text-white font-black text-2xl">Latest Updates</p>
+                        <p class="text-gray-500 text-sm mt-2">Updated every minute</p>
+                    </div>
+                </div>
+                
+                <div class="glass rounded-3xl p-8 border border-white/10 group hover:bg-white/5 hover:scale-105 transition-all duration-300 cursor-pointer">
+                    <div class="flex items-center justify-between mb-6">
+                        <div class="w-14 h-14 bg-gradient-to-br from-market-cyan to-cyan-600 rounded-2xl flex items-center justify-center group-hover:rotate-12 transition-transform">
+                            <span class="text-2xl">⚖️</span>
+                        </div>
+                        <div class="text-4xl group-hover:scale-125 transition-transform">📊</div>
+                    </div>
+                    <div>
+                        <p class="text-gray-400 text-sm font-bold uppercase tracking-wider mb-3">Market Sentiment</p>
+                        <div class="flex items-center space-x-3">
+                            <div class="w-4 h-4 bg-market-cyan rounded-full animate-pulse shadow-lg shadow-cyan-500/50"></div>
+                            <span class="text-white font-black text-2xl">Analyzing</span>
+                        </div>
+                        <p class="text-gray-500 text-sm mt-2">AI-powered analysis</p>
+                    </div>
+                </div>
+                
+                <div class="glass rounded-3xl p-8 border border-white/10 group hover:bg-white/5 hover:scale-105 transition-all duration-300 cursor-pointer">
+                    <div class="flex items-center justify-between mb-6">
+                        <div class="w-14 h-14 bg-gradient-to-br from-market-blue to-blue-600 rounded-2xl flex items-center justify-center group-hover:rotate-12 transition-transform">
+                            <span class="text-2xl">🌐</span>
+                        </div>
+                        <div class="text-4xl group-hover:scale-125 transition-transform">🔗</div>
+                    </div>
+                    <div>
+                        <p class="text-gray-400 text-sm font-bold uppercase tracking-wider mb-3">Global Sources</p>
+                        <p class="text-white font-black text-2xl">Worldwide</p>
+                        <p class="text-gray-500 text-sm mt-2">100+ trusted sources</p>
+                    </div>
+                </div>
+                
+                <div class="glass rounded-3xl p-8 border border-white/10 group hover:bg-white/5 hover:scale-105 transition-all duration-300 cursor-pointer">
+                    <div class="flex items-center justify-between mb-6">
+                        <div class="w-14 h-14 bg-gradient-to-br from-market-purple to-purple-600 rounded-2xl flex items-center justify-center group-hover:rotate-12 transition-transform">
+                            <span class="text-2xl">🔄</span>
+                        </div>
+                        <div class="text-4xl group-hover:scale-125 transition-transform">⚡</div>
+                    </div>
+                    <div>
+                        <p class="text-gray-400 text-sm font-bold uppercase tracking-wider mb-3">Live Updates</p>
+                        <div class="flex items-center space-x-3">
+                            <div class="w-4 h-4 bg-market-green rounded-full animate-pulse shadow-lg shadow-green-500/50"></div>
+                            <span class="text-white font-black text-2xl">Active</span>
+                        </div>
+                        <p class="text-gray-500 text-sm mt-2">Real-time feed</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- News Articles Section -->
+    {% if news %}
+        <div class="space-y-10">
+            <!-- Enhanced Results Header -->
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-6">
+                    <div class="w-16 h-16 bg-gradient-to-br from-market-green via-market-cyan to-market-blue rounded-2xl flex items-center justify-center shadow-xl">
+                        <span class="text-2xl">📋</span>
+                    </div>
+                    <div>
+                        <h2 class="text-4xl font-black text-white mb-2">Market Headlines</h2>
+                        <p class="text-gray-400 text-xl">Breaking financial news and expert analysis</p>
+                    </div>
+                </div>
+                <div class="glass rounded-3xl px-8 py-4 border border-white/10 backdrop-blur-xl">
+                    <div class="flex items-center space-x-4">
+                        <div class="w-3 h-3 bg-market-green rounded-full animate-pulse"></div>
+                        <span class="text-gray-300 font-bold text-lg">{{ news|length }} Article{{ news|length|pluralize }}</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Premium News Grid -->
+            <div class="grid grid-cols-1 xl:grid-cols-2 gap-10">
+                {% for article in news %}
+                    <article class="glass-card rounded-3xl backdrop-blur-xl border border-white/10 overflow-hidden hover:border-white/30 hover:bg-white/5 transition-all duration-700 group relative">
+                        <!-- Article Glow Effect -->
+                        <div class="absolute inset-0 bg-gradient-to-br from-market-cyan/5 via-transparent to-market-green/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                        
+                        <div class="relative z-10 p-12">
+                            <!-- Premium Article Header -->
+                            <div class="flex items-start justify-between mb-10">
+                                <div class="flex items-center space-x-6">
+                                    <div class="relative">
+                                        <div class="w-20 h-20 bg-gradient-to-br from-market-cyan via-market-blue to-market-purple rounded-3xl flex items-center justify-center group-hover:scale-110 group-hover:rotate-3 transition-all duration-500 shadow-2xl">
+                                            <span class="text-3xl">📄</span>
+                                        </div>
+                                        <!-- Priority Indicator -->
+                                        <div class="absolute -top-2 -right-2 w-6 h-6 bg-gradient-to-r from-market-red to-red-500 rounded-full animate-pulse shadow-lg"></div>
+                                    </div>
+                                    <div>
+                                        <p class="text-gray-300 font-bold text-xl">{{ article.time_published|date:"F d, Y" }}</p>
+                                        <p class="text-gray-500 text-lg font-semibold">{{ article.time_published|date:"H:i" }} UTC</p>
+                                        <p class="text-gray-600 text-sm mt-1">{{ article.time_published|timesince }} ago</p>
+                                    </div>
+                                </div>
+                                
+                                <!-- Ultra-Modern Sentiment Badge -->
+                                <div class="flex items-center space-x-3">
+                                    {% if article.overall_sentiment_label == 'Bullish' %}
+                                        <div class="flex items-center space-x-3 px-6 py-3 rounded-2xl bg-gradient-to-r from-market-green/20 to-green-600/20 border border-market-green/40 backdrop-blur-sm shadow-lg shadow-green-500/25 group-hover:shadow-green-500/50 transition-all">
+                                            <div class="relative">
+                                                <div class="w-4 h-4 bg-market-green rounded-full animate-ping absolute"></div>
+                                                <div class="w-4 h-4 bg-market-green rounded-full"></div>
+                                            </div>
+                                            <span class="text-market-green font-black text-lg">BULLISH</span>
+                                            <div class="text-3xl animate-bounce">📈</div>
+                                        </div>
+                                    {% elif article.overall_sentiment_label == 'Bearish' %}
+                                        <div class="flex items-center space-x-3 px-6 py-3 rounded-2xl bg-gradient-to-r from-market-red/20 to-red-600/20 border border-market-red/40 backdrop-blur-sm shadow-lg shadow-red-500/25 group-hover:shadow-red-500/50 transition-all">
+                                            <div class="relative">
+                                                <div class="w-4 h-4 bg-market-red rounded-full animate-ping absolute"></div>
+                                                <div class="w-4 h-4 bg-market-red rounded-full"></div>
+                                            </div>
+                                            <span class="text-market-red font-black text-lg">BEARISH</span>
+                                            <div class="text-3xl animate-bounce">📉</div>
+                                        </div>
+                                    {% else %}
+                                        <div class="flex items-center space-x-3 px-6 py-3 rounded-2xl bg-gradient-to-r from-gray-500/20 to-gray-600/20 border border-gray-500/40 backdrop-blur-sm shadow-lg shadow-gray-500/25 group-hover:shadow-gray-500/50 transition-all">
+                                            <div class="relative">
+                                                <div class="w-4 h-4 bg-gray-400 rounded-full animate-ping absolute"></div>
+                                                <div class="w-4 h-4 bg-gray-400 rounded-full"></div>
+                                            </div>
+                                            <span class="text-gray-400 font-black text-lg">NEUTRAL</span>
+                                            <div class="text-3xl">➡️</div>
+                                        </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+
+                            <!-- Premium Article Content -->
+                            <div class="space-y-8">
+                                <h3 class="text-3xl font-black text-white leading-tight group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:from-market-cyan group-hover:via-market-green group-hover:to-market-blue group-hover:bg-clip-text transition-all duration-500">
+                                    {{ article.title }}
+                                </h3>
+                                
+                                <p class="text-gray-400 text-xl leading-relaxed line-clamp-4 group-hover:text-gray-300 transition-colors">
+                                    {{ article.summary|truncatewords:35 }}
+                                </p>
+                                
+                                <!-- Enhanced Meta Information -->
+                                <div class="border-t border-white/20 pt-8">
+                                    <div class="flex items-center justify-between mb-6">
+                                        <div class="flex items-center space-x-8">
+                                            <div class="flex items-center space-x-3">
+                                                <div class="w-8 h-8 bg-gradient-to-r from-market-blue to-blue-600 rounded-full flex items-center justify-center">
+                                                    <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/>
+                                                    </svg>
+                                                </div>
+                                                <span class="text-gray-400 text-lg font-bold">{{ article.authors|default:"Market Stream"|cut:'{'|cut:'}'|cut:'"' }}</span>
+                                            </div>
+                                            <div class="flex items-center space-x-3">
+                                                <div class="w-8 h-8 bg-gradient-to-r from-market-purple to-purple-600 rounded-full flex items-center justify-center">
+                                                    <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"/>
+                                                    </svg>
+                                                </div>
+                                                <span class="text-gray-400 text-lg font-bold">{{ article.source }}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Read Full Story Button - Bottom Left -->
+                                    {% if article.url %}
+                                        <div class="flex justify-start">
+                                            <a href="{{ article.url }}" target="_blank" 
+                                               class="group/btn inline-flex items-center px-4 py-2 bg-gradient-to-r from-market-blue via-market-purple to-market-cyan hover:from-blue-500 hover:via-purple-500 hover:to-cyan-400 text-white font-semibold rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl relative overflow-hidden">
+                                                <span class="relative flex items-center space-x-2">
+                                                    <svg class="w-4 h-4 group-hover/btn:rotate-12 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+                                                    </svg>
+                                                    <span class="text-sm">Read Full Story</span>
+                                                </span>
+                                            </a>
+                                        </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                {% endfor %}
+            </div>
+        </div>
     {% else %}
-        <img src="{{ article.banner_image }}" alt="news_image" style="max-width: 300px; max-height: 300px; width: auto; height: auto; object-fit: contain; display: block;">
+        <!-- Premium Empty State -->
+        <div class="glass-card rounded-3xl p-24 text-center backdrop-blur-xl border border-white/10 relative overflow-hidden">
+            <!-- Background Pattern -->
+            <div class="absolute inset-0 bg-gradient-to-br from-market-cyan/5 via-transparent to-market-green/5"></div>
+            
+            <div class="relative z-10">
+                <div class="w-40 h-40 mx-auto mb-12 bg-gradient-to-br from-gray-600 via-gray-700 to-gray-800 rounded-3xl flex items-center justify-center shadow-2xl relative">
+                    <span class="text-8xl">📰</span>
+                    <div class="absolute -top-4 -right-4 w-8 h-8 bg-market-blue rounded-full animate-pulse shadow-lg"></div>
+                </div>
+                <h3 class="text-5xl font-black text-white mb-8">Content Loading...</h3>
+                <p class="text-gray-400 text-2xl mb-12 max-w-3xl mx-auto leading-relaxed">
+                    Our news aggregation system is currently gathering the latest financial stories and market insights from global sources.
+                </p>
+                
+                <!-- Premium Feature Tags -->
+                <div class="flex flex-wrap justify-center gap-6 text-xl">
+                    <span class="glass rounded-full px-8 py-4 text-gray-300 font-bold border border-white/20 hover:bg-white/10 transition-all cursor-default backdrop-blur-sm">🚀 AI Analysis</span>
+                    <span class="glass rounded-full px-8 py-4 text-gray-300 font-bold border border-white/20 hover:bg-white/10 transition-all cursor-default backdrop-blur-sm">📊 Market Data</span>
+                    <span class="glass rounded-full px-8 py-4 text-gray-300 font-bold border border-white/20 hover:bg-white/10 transition-all cursor-default backdrop-blur-sm">🌍 Global Coverage</span>
+                    <span class="glass rounded-full px-8 py-4 text-gray-300 font-bold border border-white/20 hover:bg-white/10 transition-all cursor-default backdrop-blur-sm">⚡ Real-time</span>
+                </div>
+            </div>
+        </div>
     {% endif %}
-    <p>{{ article.authors }}</p>
-    <p>{{ article.time_published }}</p>
-    <p>{{ article.source }}</p>
-    <p>{{ article.overall_sentiment_label }}</p>
-    <p>{{ article.overall_sentiment_score }}</p>
-    <p>{{ article.url }}</p>
-    <hr>
-{% endfor %}
+</div>
+
+<style>
+    .line-clamp-4 {
+        display: -webkit-box;
+        -webkit-line-clamp: 4;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+    
+    /* Custom animations */
+    @keyframes slideInUp {
+        from {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    
+    .article-card {
+        animation: slideInUp 0.6s ease-out forwards;
+    }
+    
+    /* Enhanced glow effects */
+    .glass-card:hover {
+        box-shadow: 0 0 40px rgba(83, 82, 237, 0.15);
+    }
+    
+    /* Smooth gradient animations */
+    .bg-gradient-to-r {
+        background-size: 200% 200%;
+        animation: gradientShift 3s ease infinite;
+    }
+    
+    @keyframes gradientShift {
+        0%, 100% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+    }
+</style>
 {% endblock %}
