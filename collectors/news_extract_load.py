@@ -28,7 +28,6 @@ def add_news_data_to_db(data):
         news_data = StockMarketNews(**news_data)
         db.add(news_data)
         db.commit()
-        print(f"News data added: {news_data['title']}")
 
 
 if __name__ == "__main__":

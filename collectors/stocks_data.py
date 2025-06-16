@@ -1,5 +1,4 @@
 from polygon import RESTClient
-
 from .database import StockMarketData, db
 
 # date = input("Enter a valid date in YYYY-MM-DD format: ")

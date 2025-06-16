@@ -1,6 +1,13 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+@config "../../tailwind.config.js";
+
+@theme {
+  --color-market-green: #10b981;
+  --color-market-red: #ef4444;
+  --color-market-blue: #3b82f6;
+  --color-market-dark: #1f2937;
+  --font-family-sans: Inter, system-ui, sans-serif;
+}
 
 /* Custom components */
 @layer components {

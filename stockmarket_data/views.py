@@ -27,21 +27,32 @@ class StocksListView(ListView):
                     stock_symbol=query, from_date=date
                 )
                 if stock_search.exists():
-                    # Ajouter à l'historique persistant
-                    SearchStorage.objects.create(stock_id=stock_search.first())
+                    # Ajouter à l'historique persistant avec l'utilisateur connecté
+                    if self.request.user.is_authenticated:
+                        SearchStorage.objects.create(
+                            stock_id=stock_search.first(),
+                            user_id=self.request.user
+                        )
             except Exception as e:
                 print(f"Erreur API (rate limit?): {e}")
 
-        # Toujours retourner TOUS les résultats persistants
-        return SearchStorage.objects.all().order_by("-id")
+        # Filtrer les résultats par utilisateur connecté
+        if self.request.user.is_authenticated:
+            return SearchStorage.objects.filter(user_id=self.request.user).order_by("-id")
+        else:
+            # Pour les utilisateurs non connectés, retourner une queryset vide
+            return SearchStorage.objects.none()
 
 
 class DeleteStockView(View):
     def post(self, request, pk):
-        # Supprimer un résultat spécifique
+        # Supprimer un résultat spécifique seulement si il appartient à l'utilisateur connecté
         try:
-            search_item = SearchStorage.objects.get(pk=pk)
-            search_item.delete()
+            if request.user.is_authenticated:
+                search_item = SearchStorage.objects.get(pk=pk, user_id=request.user)
+                search_item.delete()
+            else:
+                return redirect("stockmarket_data:stocks_list")
         except SearchStorage.DoesNotExist:
             return "No data found"
         return redirect("stockmarket_data:stocks_list")

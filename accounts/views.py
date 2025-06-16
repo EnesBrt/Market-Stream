@@ -1,6 +1,5 @@
 from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import redirect, render
-
 from .forms import LoginForm, SignupForm
 
 
@@ -13,7 +12,7 @@ def signup_view(request):
             return redirect("accounts:login")
     else:
         signup_form = SignupForm()
-    return render(request, "signup.html", {"signup_form": signup_form})
+    return render(request, "signup.html", {"form": signup_form})
 
 
 def login_view(request):

@@ -22,5 +22,6 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("", include("accounts.urls")),
     path("news", include("stockmarket_news.urls")),
+    # Temporary comment to fix import issues
     path("stocks/", include("stockmarket_data.urls")),
 ]

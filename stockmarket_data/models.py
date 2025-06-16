@@ -1,4 +1,5 @@
 from django.db import models
+from accounts.models import MarketStreamUser
 
 
 class StockMarketData(models.Model):
@@ -24,3 +25,4 @@ class StockMarketData(models.Model):
 
 class SearchStorage(models.Model):
     stock_id = models.ForeignKey(StockMarketData, on_delete=models.CASCADE)
+    user_id = models.ForeignKey(MarketStreamUser, on_delete=models.CASCADE, null=True, blank=True)
